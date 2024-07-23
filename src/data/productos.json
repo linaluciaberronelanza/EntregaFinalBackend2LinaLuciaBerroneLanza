@@ -1,0 +1,109 @@
+[
+  {
+    "title": "Mate",
+    "descrition": "El mas rico",
+    "price": "1500",
+    "code": "abc123",
+    "stock": 150,
+    "id": 1
+  },
+  {
+    "title": "Producto 2",
+    "description": "Descripción del producto 2",
+    "price": "150",
+    "img": "sin imagen",
+    "code": "XYZ456",
+    "stock": 5,
+    "id": 2
+  },
+  {
+    "title": "Pizza Margherita",
+    "description": "Pizza clásica con tomate, mozzarella y albahaca.",
+    "price": "200",
+    "img": "sin imagen",
+    "code": "PIZ123",
+    "stock": 10,
+    "id": 1
+  },
+  {
+    "title": "Hamburguesa Clásica",
+    "description": "Hamburguesa de carne con lechuga, tomate y queso.",
+    "price": "150",
+    "img": "sin imagen",
+    "code": "HAM234",
+    "stock": 15,
+    "id": 2
+  },
+  {
+    "title": "Tacos al Pastor",
+    "description": "Tacos de cerdo marinados con piña y cilantro.",
+    "price": "120",
+    "img": "sin imagen",
+    "code": "TAC345",
+    "stock": 20,
+    "id": 3
+  },
+  {
+    "title": "Sushi Roll",
+    "description": "Roll de sushi con salmón, aguacate y pepino.",
+    "price": "250",
+    "img": "sin imagen",
+    "code": "SUS456",
+    "stock": 8,
+    "id": 4
+  },
+  {
+    "title": "Ensalada César",
+    "description": "Ensalada de lechuga romana con aderezo César y crutones.",
+    "price": "100",
+    "img": "sin imagen",
+    "code": "ENS567",
+    "stock": 12,
+    "id": 5
+  },
+  {
+    "title": "Pasta Carbonara",
+    "description": "Pasta con salsa de huevo, queso y panceta.",
+    "price": "180",
+    "img": "sin imagen",
+    "code": "PAS678",
+    "stock": 7,
+    "id": 6
+  },
+  {
+    "title": "Burrito de Pollo",
+    "description": "Burrito relleno de pollo, arroz, frijoles y salsa.",
+    "price": "130",
+    "img": "sin imagen",
+    "code": "BUR789",
+    "stock": 18,
+    "id": 7
+  },
+  {
+    "title": "Empanada de Carne",
+    "description": "Empanada rellena de carne, aceitunas y huevo.",
+    "price": "50",
+    "img": "sin imagen",
+    "code": "EMP890",
+    "stock": 25,
+    "id": 8
+  },
+  {
+    "title": "Falafel",
+    "description": "Croquetas de garbanzos con especias.",
+    "price": "70",
+    "img": "sin imagen",
+    "code": "FAL901",
+    "stock": 30,
+    "id": 9
+  },
+  {
+    "title": "Churros con Chocolate",
+    "description": "Churros fritos servidos con chocolate caliente.",
+    "price": "90",
+    "img": "sin imagen",
+    "code": "CHU012",
+    "stock": 22,
+    "id": 10
+  }
+]

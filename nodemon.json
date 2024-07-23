@@ -1,0 +1,12 @@
+{
+    "watch": ["src"],
+    "ignore": [
+      "node_modules",
+      "dist",
+      "logs",
+      "*.log",
+      "src/data/*.json"
+    ],
+    "ext": "js,json",
+    "exec": "node src/app.js"
+  }
