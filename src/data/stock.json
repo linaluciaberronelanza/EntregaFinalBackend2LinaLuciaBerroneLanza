@@ -1,0 +1,92 @@
+[
+    {
+        "title": "Render interior",
+        "description": "Imagen interior de la obra, desde el punto de vista indicado; alta resolución.(sin maqueta incluida)",
+        "price": "10000",
+        "img": "/img/pcrender4.png",
+        "code": "XYZ456",
+        "stock": 1,
+        "category": "renders",
+        "id": 1
+    },
+    {
+        "title": "Render exterior",
+        "description": "Imagen exterior de la obra, desde el punto de vista indicado; alta resolución.(sin maqueta incluida)",
+        "price": "10000",
+        "img": "/img/caj1.png",
+        "code": "XYZ456",
+        "stock": 1,
+        "category": "renders",
+        "id": 2
+    },
+    {
+        "title": "Render planta de venta",
+        "description": "Plantas en alta resolución, tipo 3D para ventas. Estilo a elegir.",
+        "price": "7000",
+        "img": "/img/pcrender8.png",
+        "code": "Rplant",
+        "stock": 1,
+        "category": "renders",
+        "id": 3
+    },
+    {
+        "title": "Maquetado 3d",
+        "description": "Maquetado 3d de edificio o producto en Sketchup. Se entrega archivo skp.",
+        "price": "10000",
+        "img": "../img/prod4.png",
+        "code": "Maq3d",
+        "stock": 1,
+        "category": "planos",
+        "id": 4
+    },
+    {
+        "title": "Infografia",
+        "description": "Diagrama visual individual, que resume o explica figurativamente informaciones o textos. Estilos variados.",
+        "price": "3000",
+        "img": "../img/prod5.png",
+        "code": "Inf",
+        "stock": 1,
+        "category": "imagenes",
+        "id": 5
+    },
+    {
+        "title": "Infografia compleja",
+        "description": "Diagrama visual complejo, que resume o explica figurativamente informaciones o textos. Estilos variados.",
+        "price": "7000",
+        "img": "../img/prod6.png",
+        "code": "Infc",
+        "stock": 1,
+        "category": "imagenes",
+        "id": 6
+    },
+    {
+        "title": "Axonometria",
+        "description": "Axonometría de obra u objeto, despieces infográficos.Se entrega png a convenir. Estilo a elegir",
+        "price": "12000",
+        "img": "../img/graficocontacto1.png",
+        "code": "Axo",
+        "stock": 1,
+        "category": "imagenes",
+        "id": 7
+    },
+    {
+        "title": "Legajo arquitectonico",
+        "description": "Plantas, cortes, vistas, legajos completos. Diferentes estilos. Precio sobre 100 m2. Consultar por mas m2.",
+        "price": "12000",
+        "img": "../img/prod8.jpg",
+        "code": "Legarq",
+        "stock": 1,
+        "category": "planos",
+        "id": 8
+    },
+    {
+        "title": "Desarrollo Urbanistico",
+        "description": "Plano o esquema infográfico sobre un área urbanistica. Planta 3d informativa. Estilos varios.",
+        "price": "15000",
+        "img": "../img/prod9.png",
+        "code": "Desurb",
+        "stock": 1,
+        "category": "planos",
+        "id": 9
+    }
+  ]

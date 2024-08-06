@@ -83,7 +83,6 @@ class ProductManager {
         await fs.writeFile(this.path, JSON.stringify(arrayProductos, null, 2));
     }
 
-    //Estan faltando los metodos de actualizar y eliminar. 
     async actualizarProducto(id, data) {
         const arrayProductos = await this.leerArchivo();
         const buscarIndex = arrayProductos.findIndex(product => product.id === id);
@@ -105,11 +104,29 @@ class ProductManager {
         if (buscarIndex != -1) {
             arrayProductos.splice(buscarIndex, 1);
             await this.guardarArchivo(arrayProductos);
-            console.log("Porducto eliminado exitosamente");
+            console.log("Producto eliminado exitosamente");
             return true;
         } else {
             console.log("Producto no encontrado - metodo borrar");
             return false;
+        }
+    }
+    //desde aca agregue
+    async cargarProductosDesdeStock(stockPath) {
+        try {
+            const stockData = await fs.readFile(stockPath, "utf-8");
+            const stockProductos = JSON.parse(stockData);
+
+            const arrayProductos = await this.leerArchivo();
+
+            // Reemplaza los productos actuales con los productos del stock
+            arrayProductos.length = 0;
+            stockProductos.forEach(producto => arrayProductos.push(producto));
+
+            await this.guardarArchivo(arrayProductos);
+        } catch (error) {
+            console.log("Error al cargar productos desde el stock");
+            throw error;
         }
     }
 
