@@ -1,10 +1,11 @@
 import express from "express";
-import ProductManager from "../controllers/product-manager.js";
+import ProductManager from "../dao/db/product-manager-db.js";
 
 const router = express.Router();
-const manager = new ProductManager("./src/data/productos.json")
+const manager = new ProductManager();
 
-router.get("/products", async (req, res) => {
+/*
+router.get("/", async (req, res) => {
 
     let limit = req.query.limit;
 
@@ -18,49 +19,60 @@ router.get("/products", async (req, res) => {
     } catch (error) {
         res.status(500).send("Error interno del servidor")
     }
-});
+}); 
+*/
+
+router.get("/", async (req, res) => {
+    const arrayProductos = await manager.getProducts();
+    res.send(arrayProductos);
+})
 
 
-router.get("/products/:pid", async (req, res) => {
-    let id = req.params.pid;
-
-    const producto = await manager.getProductById(parseInt(id));
-
-    if (!producto) {
-        res.send("No se encuentra el producto")
-    } else {
-        res.send({ producto });
+router.get("/:pid", async (req, res) => {
+    const id = req.params.pid;
+    try {
+        const producto = await manager.getProductById(id);
+        if (!producto) {
+            res.status(404).send("Producto no encontrado");
+        } else {
+            res.json(producto);
+        }
+    } catch (error) {
+        res.status(500).send("Error al buscar el producto");
     }
 });
 
-router.post("/products", async (req, res) => {
+router.post("/", async (req, res) => {
     const nuevoProducto = req.body;
+    console.log("Nuevo producto:", nuevoProducto); // Agrega esta línea para depuración
+
     try {
         await manager.addProduct(nuevoProducto);
         res.status(201).send({ message: "Producto agregado exitosamente !!" });
-    } catch (error) {
-        res.status(500).send({ status: "error", message: error.message })
-    }
-});
-
-router.put("/products/:pid", async (req, res) => {
-    let id = parseInt(req.params.pid);
-    const productoActualizable = req.body;
-
-    try {
-        const productoActualizado = await manager.actualizarProducto(id, productoActualizable);
-        if (productoActualizado) {
-            res.send({ message: "Producto actualizado exitosamente", producto: productoActualizado });
-        } else {
-            res.status(404).send("Producto no encontrado");
-        }
     } catch (error) {
         res.status(500).send({ status: "error", message: error.message });
     }
 });
 
-router.delete("/products/:pid", async (req, res) => {
-    let id = parseInt(req.params.pid);
+router.put('/:pid', async (req, res) => {
+    const productoActualizable = req.body;
+    const id = req.params.pid;
+
+    try {
+        const productoActualizado = await manager.actualizarProducto(id, productoActualizable);
+        if (productoActualizado) {
+            res.send({ message: 'Producto actualizado exitosamente', producto: productoActualizado });
+        } else {
+            res.status(404).send('Producto no encontrado');
+        }
+    } catch (error) {
+        res.status(500).send({ status: 'error', message: error.message });
+    }
+});
+
+
+router.delete("/:pid", async (req, res) => {
+    let id = req.params.pid;
 
     try {
         const resultado = await manager.borrarProducto(id);

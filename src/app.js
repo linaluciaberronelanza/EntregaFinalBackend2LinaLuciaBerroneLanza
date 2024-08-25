@@ -1,17 +1,17 @@
 //const express = require("express");
 import express from "express";
 import { engine } from "express-handlebars";
-import { Server } from "socket.io";
-import productRouter from "./routes/products.router.js";
-import cartRouter from "./routes/carts.router.js";
+//import { Server } from "socket.io";
+import productsRouter from "./routes/products.router.js";
+import cartsRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
-import ProductManager from "./controllers/product-manager.js";
-import path from 'path';
-
+//import ProductManager from "./controllers/product-manager.js";
+//import path from 'path';
+import './database.js';
 
 const app = express();
 const PUERTO = 8000;
-const manager = new ProductManager("./src/data/productos.json");
+//const manager = new ProductManager("./src/data/productos.json");
 
 //CONFIGURACION EXPRESS-HANDLEBARS
 app.engine("handlebars", engine());
@@ -22,29 +22,18 @@ app.set("views", "./src/views");
 app.use(express.json());
 app.use(express.static("./src/public"));
 
-app.use("/api/products", productRouter);
-app.use("/api/carts", cartRouter);
+//RUTAS
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
+
+const httpServer = app.listen(PUERTO, () => {
+    console.log("Escuchando en el puerto 8000");
+});
 
 
 //CONEXION SOCKET.IO
-const httpServer = app.listen(PUERTO, () => {
-    console.log("Escuchando en el puerto 8000");
-})
-
-const io = new Server(httpServer);
-
-// io.on("connection", async (socket) => {
-//     console.log("Un cliente se conecto");
-
-//     socket.emit("productos", await manager.getProducts());
-
-//     socket.on("eliminarProducto", async (id) => {
-//         await manager.borrarProducto(id);
-
-//         io.sockets.emit("productos", await manager.getProducts());
-//     })
-// });
+/* const io = new Server(httpServer);
 
 io.on("connection", async (socket) => {
     console.log("Un cliente se conectó");
@@ -75,4 +64,4 @@ io.on("connection", async (socket) => {
         await manager.cargarProductosDesdeStock(stockPath);
         io.sockets.emit("productos", await manager.getProducts());
     });
-});
+}); */
