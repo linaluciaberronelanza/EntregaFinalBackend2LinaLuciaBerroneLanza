@@ -22,10 +22,24 @@ router.get("/", async (req, res) => {
 }); 
 */
 
-router.get("/", async (req, res) => {
+//metodo get que tuve que modificar para quereciba un sort
+/*router.get("/", async (req, res) => {
     const arrayProductos = await manager.getProducts();
     res.send(arrayProductos);
-})
+})*/
+
+router.get("/", async (req, res) => {
+    const sort = req.query.sort;
+
+    try {
+        console.log("Sort query param:", sort);
+        const arrayProductos = await manager.getProducts(sort);
+        res.send(arrayProductos);
+    } catch (error) {
+        console.error("Error al obtener productos:", error.message);
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
+    }
+});
 
 
 router.get("/:pid", async (req, res) => {

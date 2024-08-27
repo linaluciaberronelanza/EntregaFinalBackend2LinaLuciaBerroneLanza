@@ -33,12 +33,30 @@ class ProductManager {
     }
 
     //LEE EL ARCHIVO
-    async getProducts() {
+    //metodo que tuve que suplantar para que me tomara el sort en api/products
+    /*async getProducts() {
         try {
             const arrayProductos = await ProductModel.find();
             return arrayProductos;
         } catch (error) {
             console.log("Error al leer el archivo")
+        }
+    }*/
+
+    async getProducts(sort) {
+        try {
+            let query = ProductModel.find();
+
+            if (sort) {
+                const sortOrder = sort === "asc" ? 1 : -1;
+                query = query.sort({ price: sortOrder });
+            }
+
+            const arrayProductos = await query.exec();
+            return arrayProductos;
+        } catch (error) {
+            console.log("Error al leer los productos", error.message);
+            throw error;
         }
     }
 
@@ -86,6 +104,9 @@ class ProductManager {
             throw error;
         }
     }
+
+    //metodo SORT de ordenamiento ascendente o descente
+
 }
 
 export default ProductManager;

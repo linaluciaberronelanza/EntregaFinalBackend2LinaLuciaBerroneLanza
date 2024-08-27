@@ -5,16 +5,18 @@ const cartSchema = new mongoose.Schema({
         {
             product: {
                 type: String,
+                ref: "Product",
                 required: true
             },
             quantity: {
                 type: Number,
-                required: true
-            }
-        }
-    ]
+                required: true,
+                default: 1,
+            },
+        },
+    ],
 });
 
-const CartModel = mongoose.model("carts", cartSchema);
+const CartModel = mongoose.model("Cart", cartSchema);
 
 export default CartModel;

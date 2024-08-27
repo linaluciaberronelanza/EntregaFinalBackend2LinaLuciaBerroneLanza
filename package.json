@@ -11,10 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "db": "^6.0.3",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.3",
-    "mongo": "^0.1.0",
     "mongoose": "^8.5.4",
     "socket.io": "^4.7.5"
   },
