@@ -1,4 +1,4 @@
-.titles{
+.titles {
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
@@ -8,6 +8,7 @@
     font-family: "Montserrat", sans-serif;
 
 }
+
 .productosContenedor {
     display: flex;
     flex-wrap: wrap;
@@ -15,6 +16,7 @@
     margin-top: 1rem;
     overflow: hidden;
 }
+
 .cardProducto {
     display: flex;
     flex-direction: column;
@@ -93,7 +95,8 @@
     font-size: 14px;
 }
 
-.cardStock, .cardCategory {
+.cardStock,
+.cardCategory {
     margin: 0;
     padding: 0 0.5rem;
 }
@@ -197,4 +200,41 @@
     outline: none;
     cursor: pointer;
     margin-top: 1rem;
+}
+
+.paginacion {
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background: #3a3636;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #a2a6ab;
+}
+
+.btn.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    font-weight: 700;
+}
+
+.page-number {
+    font-size: 16px;
+    font-weight: 700;
 }

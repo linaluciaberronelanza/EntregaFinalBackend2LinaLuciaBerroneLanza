@@ -5,6 +5,7 @@ const router = express.Router();
 const manager = new ProductManager();
 
 /*
+//METODO LIMIT QUE HABIAMOS ARMADO CON SAMU EN UN AFTER
 router.get("/", async (req, res) => {
 
     let limit = req.query.limit;
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 }); 
 */
 
-//metodo get que tuve que modificar para quereciba un sort
+//METODO GET BASICO, QUE TUVE QUE MODIFICAR PARA QUE ADMITIERA UN SORT
 /*router.get("/", async (req, res) => {
     const arrayProductos = await manager.getProducts();
     res.send(arrayProductos);

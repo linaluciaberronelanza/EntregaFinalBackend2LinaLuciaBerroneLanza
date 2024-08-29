@@ -1,13 +1,14 @@
-//const express = require("express");
+
+//import { Server } from "socket.io";
+//import ProductManager from "./controllers/product-manager.js";
+//import path from 'path';
 import express from "express";
 import { engine } from "express-handlebars";
-//import { Server } from "socket.io";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
-//import ProductManager from "./controllers/product-manager.js";
-//import path from 'path';
 import './database.js';
+import ProductModel from "./dao/models/product.model.js";
 
 const app = express();
 const PUERTO = 8000;
@@ -21,6 +22,7 @@ app.set("views", "./src/views");
 //MIDDLEWARE
 app.use(express.json());
 app.use(express.static("./src/public"));
+app.use(express.urlencoded({ extended: true }));
 
 //RUTAS
 app.use("/api/products", productsRouter);

@@ -27,8 +27,22 @@
                 <button class="cardButton">Comprar</button>
             </div>
         </div>
-
         {{/each}}
+    </div>
+    <div class="paginacion">
+        {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}" class="btn btn-prev">Anterior</a>
+        {{else}}
+        <button class="btn btn-prev disabled" disabled>Anterior</button>
+        {{/if}}
+
+        <span class="page-number">Página {{currentPage}} de {{totalPages}}</span>
+
+        {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}" class="btn btn-next">Siguiente</a>
+        {{else}}
+        <button class="btn btn-next disabled" disabled>Siguiente</button>
+        {{/if}}
     </div>
 </body>
 
