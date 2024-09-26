@@ -1,8 +1,8 @@
-import express from "express";
+import { Router } from "express";
+const router = Router(); 
 import ProductManager from "../dao/db/product-manager-db.js";
 import ProductModel from "../dao/models/product.model.js";
 
-const router = express.Router();
 const manager = new ProductManager("");
 
 /* 
@@ -42,5 +42,14 @@ router.get("/realtimeproducts", (req, res) => {
     res.render("realtimeproducts");
 });
 
+//BACKEND 2 PRE-ENTREGA 
+
+router.get("/register", (req, res) => {
+    res.render("register"); 
+})
+
+router.get("/login", (req, res) => {
+    res.render("login"); 
+})
 
 export default router;
