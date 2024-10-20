@@ -23,17 +23,17 @@ const usuarioSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    cartId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Cart'  // Esto debe ser 'Cart' (nombre del modelo de carrito)
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Carts'
     },
-    rol: {
+    role: {
         type: String,
-        enum: ["admin", "user"],
-        default: "user"
+        enum: ['admin', 'user'],
+        default: 'user'
     }
 })
 
-const UsuarioModel = mongoose.model("usuarios", usuarioSchema);
+const UsuarioModel = mongoose.model('usuarios', usuarioSchema);
 
 export default UsuarioModel;

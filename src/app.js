@@ -2,17 +2,19 @@
 //import { Server } from "socket.io";
 //import ProductManager from "./controllers/product-manager.js";
 //import path from 'path';
+//import ProductModel from "./dao/models/product.model.js";
 import express from "express";
 import { engine } from "express-handlebars";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
+import './database.js';
+
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
-import usuarioRouter from "./routes/usuario.router.js";
-import './database.js';
-import ProductModel from "./dao/models/product.model.js";
+import sessionRouter from "./routes/session.router.js";
+
 
 const app = express();
 const PUERTO = 8000;
@@ -28,14 +30,15 @@ app.use(express.json());
 app.use(express.static("./src/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(passport.initialize()); 
 initializePassport(); 
-app.use(passport.initialize());
+
 
 //RUTAS
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/sessions", sessionRouter); 
 app.use("/", viewsRouter);
-app.use("/api/sessions", usuarioRouter); 
 
 const httpServer = app.listen(PUERTO, () => {
     console.log("Escuchando en el puerto 8000");
