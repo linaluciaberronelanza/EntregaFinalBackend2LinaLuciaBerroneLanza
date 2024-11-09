@@ -1,21 +1,24 @@
 import cartDao from "../dao/cart.dao.js";
 
 class CartRepository {
-    async createCart(){
-        return await cartDao.save({products: []}); 
+    async createCart() {
+        return await cartDao.save({ products: [] });
     }
 
-    async getCartById(id){
+    async getCartById(id) {
         return await cartDao.findById(id);
     }
 
     async updateCart(id, cartData) {
-        return await cartDao.update(id, cartData); 
+        return await cartDao.update(id, cartData);
     }
 
     async deleteCart(id) {
-        return await cartDao.delete(id); 
+        return await cartDao.delete(id);
     }
+    async clearProductsToCart(id) {
+        return await cartDao.findById(id);
+    };
 }
 
 export default new CartRepository(); 

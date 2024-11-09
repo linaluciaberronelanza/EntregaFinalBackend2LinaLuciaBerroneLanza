@@ -15,14 +15,14 @@
         {{#each productos}}
         <div class="cardProducto">
             <div class="cartItem">
-                <p>ID: {{this.id}}</p>
-                <p class="cardTitle">{{this.title}}</p>
-                <img src="{{this.img}}" alt="" class="cardImg">
-                <p class="cardDescription">{{this.description}}</p>
-                <p class="cardPrice">{{this.price}}</p>
+                <p>ID: {{_id}}</p>
+                <p class="cardTitle">{{title}}</p>
+                <img src="{{img}}" alt="" class="cardImg">
+                <p class="cardDescription">{{description}}</p>
+                <p class="cardPrice">{{price}}</p>
                 <div class="cardFooter">
-                    <p class="cardStock">Stock: {{this.stock}}</p>
-                    <p class="cardCategory">Categoria: {{this.category}}</p>
+                    <p class="cardStock">Stock: {{stock}}</p>
+                    <p class="cardCategory">Categoria: {{category}}</p>
                 </div>
                 <button class="cardButton">Comprar</button>
             </div>

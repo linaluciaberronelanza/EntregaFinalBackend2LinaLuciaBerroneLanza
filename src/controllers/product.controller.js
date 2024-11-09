@@ -4,10 +4,27 @@ class ProductController {
     async getProducts(req, res) {
         const { limit = 10, page = 1, sort, query } = req.query;
         try {
-            const products = await productService.getProducts({ limit, page, sort, query });
-            res.json(products);
+            // Llamamos al servicio y le pasamos los parámetros necesarios para la paginación
+            const options = {
+                limit: parseInt(limit),
+                page: parseInt(page),
+                sort: sort ? { price: sort === 'asc' ? 1 : -1 } : undefined
+            };
+
+            const productsData = await productService.getProducts(options);
+
+            // Verificamos si productsData tiene la estructura esperada
+            if (!productsData || !productsData.docs) {
+                return res.status(500).json({ status: "error", error: "No se pudo obtener los productos" });
+            }
+
+            // Extraemos `docs` para mapear los productos y enviarlos al cliente
+            const { docs: products, ...pagination } = productsData;
+            res.render("products", { products, pagination });
+
         } catch (error) {
-            res.status(500).send("Error interno del servidor");
+            console.error("Error al obtener productos", error);
+            res.status(500).json({ status: "error", error: "Error interno del servidor" });
         }
     }
 

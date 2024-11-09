@@ -6,22 +6,25 @@ class ProductDao {
     }
 
     async find(query) {
-        return await ProductModel.find(query); 
+        return await ProductModel.find(query);
     }
 
     async save(productData) {
-        const product = new ProductModel(productData); 
-        return await product.save(); 
+        const product = new ProductModel(productData);
+        return await product.save();
     }
 
     async update(id, productData) {
-        return await ProductModel.findByIdAndUpdate(id, productData); 
+        return await ProductModel.findByIdAndUpdate(id, productData, { new: true });
     }
 
     async delete(id) {
-        return await ProductModel.findByIdAndDelete(id); 
+        return await ProductModel.findByIdAndDelete(id);
     }
 
+    async paginate(query, options) {
+        return await ProductModel.paginate(query, options);
+    }
 }
 
-export default new ProductDao(); 
+export default new ProductDao();

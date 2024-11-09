@@ -6,7 +6,7 @@ class UserController {
         const { first_name, last_name, email, age, password } = req.body;
 
         try {
-            const newUser = await userService.registerUser({ first_name, last_name, email, age, password });
+            const newUser = await userService.registerUser({ first_name, last_name, email, age, password, });
 
             const token = jwt.sign({
                 usuario: `${newUser.first_name} ${newUser.last_name}`,
@@ -45,7 +45,7 @@ class UserController {
         if (req.user) {
             const user = req.user;
             const userDTO = new UserDTO(user);
-            res.render("home", { user: userDTO })
+            res.render("start", { user: userDTO })
         } else {
             res.send("No autorizado");
         }

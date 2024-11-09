@@ -1,19 +1,23 @@
 import ProductModel from "../models/product.model.js";
 
 class ProductManager {
+
     async addProduct({ title, description, price, img, code, stock, category, thumbnails }) {
         try {
-            if (!title || !description || !price || !img || !code || !stock || !category) {
-                throw new Error("Todos los campos son obligatorios");
+
+            if (!title || !description || !price || !code || !stock || !category) {
+                console.log("Todos los campos son obligatorios");
+                return;
             }
 
-            const existeCodigo = await ProductModel.findOne({ code });
+            const existeProducto = await ProductModel.findOne({ code: code });
 
-            if (existeCodigo) {
-                throw new Error("El código ya existe");
+            if (existeProducto) {
+                console.log("El código debe ser único, malditooo!!!");
+                return;
             }
 
-            const nuevoProducto = new ProductModel({
+            const newProduct = new ProductModel({
                 title,
                 description,
                 price,
@@ -25,88 +29,110 @@ class ProductManager {
                 thumbnails: thumbnails || []
             });
 
-            await nuevoProducto.save();
+            await newProduct.save();
+
         } catch (error) {
-            console.log("Error al agregar producto:", error.message);
+            console.log("Error al agregar producto", error);
             throw error;
         }
     }
 
-    //LEE EL ARCHIVO
-    //metodo que tuve que suplantar para que me tomara el sort en api/products
-    /*async getProducts() {
+    async getProducts({ limit = 10, page = 1, sort, query } = {}) {
         try {
-            const arrayProductos = await ProductModel.find();
-            return arrayProductos;
-        } catch (error) {
-            console.log("Error al leer el archivo")
-        }
-    }*/
+            const skip = (page - 1) * limit;
 
-    async getProducts(sort) {
-        try {
-            let query = ProductModel.find();
+            let queryOptions = {};
 
-            if (sort) {
-                const sortOrder = sort === "asc" ? 1 : -1;
-                query = query.sort({ price: sortOrder });
+            if (query) {
+                queryOptions = { category: query };
             }
 
-            const arrayProductos = await query.exec();
-            return arrayProductos;
+            const sortOptions = {};
+            if (sort) {
+                if (sort === 'asc' || sort === 'desc') {
+                    sortOptions.price = sort === 'asc' ? 1 : -1;
+                }
+            }
+
+            const productos = await ProductModel
+                .find(queryOptions)
+                .sort(sortOptions)
+                .skip(skip)
+                .limit(limit);
+
+            const totalProducts = await ProductModel.countDocuments(queryOptions);
+
+            const totalPages = Math.ceil(totalProducts / limit);
+            const hasPrevPage = page > 1;
+            const hasNextPage = page < totalPages;
+
+            return {
+                docs: productos,
+                totalPages,
+                prevPage: hasPrevPage ? page - 1 : null,
+                nextPage: hasNextPage ? page + 1 : null,
+                page,
+                hasPrevPage,
+                hasNextPage,
+                prevLink: hasPrevPage ? `/api/products?limit=${limit}&page=${page - 1}&sort=${sort}&query=${query}` : null,
+                nextLink: hasNextPage ? `/api/products?limit=${limit}&page=${page + 1}&sort=${sort}&query=${query}` : null,
+            };
         } catch (error) {
-            console.log("Error al leer los productos", error.message);
+            console.log("Error al obtener los productos", error);
             throw error;
         }
     }
 
-    //Metodo que debe buscar en el arreglo el producto que coincida con el id
     async getProductById(id) {
         try {
-            const buscado = await ProductModel.findById(id);
+            const producto = await ProductModel.findById(id);
 
-            if (!buscado) {
-                console.log("Producto no encontrado - metodo obtener producto");
+            if (!producto) {
+                console.log("Producto no encontrado");
                 return null;
             }
-            return buscado;
+
+            console.log("Producto encontrado!! Claro que siiiiii");
+            return producto;
         } catch (error) {
-            console.log("Error al buscar por ID");
+            console.log("Error al traer un producto por id");
         }
     }
 
-    //Métodos auxiliares: 
-    async actualizarProducto(id, productoActualizado) {
+    async updateProduct(id, productoActualizado) {
         try {
-            const actualizado = await ProductModel.findByIdAndUpdate(id, productoActualizado);
 
-            if (!actualizado) {
-                console.log("No se encuentra el producto para actualizar");
+            const updateado = await ProductModel.findByIdAndUpdate(id, productoActualizado);
+
+            if (!updateado) {
+                console.log("No se encuentra che el producto");
                 return null;
             }
-            return actualizado;
+
+            console.log("Producto actualizado con exito, como todo en mi vidaa!");
+            return updateado;
         } catch (error) {
-            console.error("Error al actualizar producto:", error.message);
+            console.log("Error al actualizar el producto", error);
+
+        }
+    }
+
+    async deleteProduct(id) {
+        try {
+
+            const deleteado = await ProductModel.findByIdAndDelete(id);
+
+            if (!deleteado) {
+                console.log("No se encuentraaaa, busca bien!");
+                return null;
+            }
+
+            console.log("Producto eliminado correctamente!");
+        } catch (error) {
+            console.log("Error al eliminar el producto", error);
             throw error;
         }
     }
-
-    async borrarProducto(id) {
-        try {
-            const borrado = await ProductModel.findByIdAndDelete(id);
-            if (!borrado) {
-                console.log("No se encuentra el producto para borrar");
-                return null;
-            }
-            return borrado;
-        } catch (error) {
-            console.error("Error al borrar producto:", error.message);
-            throw error;
-        }
-    }
-
-    //metodo SORT de ordenamiento ascendente o descente
-
 }
 
 export default ProductManager;
